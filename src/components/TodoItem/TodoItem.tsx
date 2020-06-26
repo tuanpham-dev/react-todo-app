@@ -1,5 +1,6 @@
 import React, { FC } from 'react'
 import { Todo } from '../../types'
+import { StyledTodoItem } from './styles'
 
 interface Props {
   todo: Todo
@@ -8,10 +9,14 @@ interface Props {
 
 const TodoItem: FC<Props> = ({ todo, onToggle }) => {
   return (
-    <li>
-      <input type="checkbox" checked={todo.completed} onChange={() => onToggle(todo)} />
-      <span>{todo.title}</span>
-    </li>
+    <StyledTodoItem.Wrapper>
+      <StyledTodoItem.Checkbox
+        type="checkbox"
+        checked={todo.completed}
+        onChange={() => onToggle(todo)}
+      />
+      <StyledTodoItem.Label>{todo.title}</StyledTodoItem.Label>
+    </StyledTodoItem.Wrapper>
   )
 }
 

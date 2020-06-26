@@ -2,6 +2,7 @@ import React, { FC, useState, ChangeEvent, KeyboardEvent } from 'react'
 import { Todo } from '../../types'
 import TodoItem from '../TodoItem/TodoItem'
 import { v4 as uuid4 } from 'uuid'
+import { StyledTodos } from './styles'
 
 interface Props {}
 
@@ -40,12 +41,12 @@ const Todos: FC<Props> = () => {
   }
 
   return (
-    <div>
-      <header>
+    <StyledTodos.Wrapper>
+      <StyledTodos.Header>
         <h1>Todo App</h1>
-      </header>
+      </StyledTodos.Header>
       <div>
-        <input
+        <StyledTodos.Input
           type="text"
           placeholder="What needs to be done?"
           value={input}
@@ -53,12 +54,12 @@ const Todos: FC<Props> = () => {
           onKeyDown={handleKeyDown}
         />
       </div>
-      <ul>
+      <StyledTodos.List>
         {todos.map((todo) => (
           <TodoItem key={todo.id} todo={todo} onToggle={handleToggle} />
         ))}
-      </ul>
-    </div>
+      </StyledTodos.List>
+    </StyledTodos.Wrapper>
   )
 }
 
