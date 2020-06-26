@@ -1,28 +1,50 @@
-import React, { FC } from 'react'
+import React, { FC, useState, ChangeEvent, KeyboardEvent } from 'react'
 import { Todo } from '../types'
 import TodoItem from './TodoItem'
+import { v4 as uuid4 } from 'uuid'
 
 interface Props {}
 
 const Todos: FC<Props> = () => {
-  const todos: Todo[] = [
-    {
-      id: '1',
-      title: 'Read a book',
-      completed: false,
-    },
-    {
-      id: '2',
-      title: 'Run a mile',
-      completed: false,
-    },
-  ]
+  const [todos, setTodos] = useState<Todo[]>([])
+  const [input, setInput] = useState<string>('')
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setInput(e.target.value)
+  }
+
+  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter' || e.keyCode === 13) {
+      if (input.length > 0) {
+        const newTodos: Todo[] = [
+          ...todos,
+          {
+            id: uuid4(),
+            title: input,
+            completed: false,
+          },
+        ]
+
+        setTodos(newTodos)
+        setInput('')
+      }
+    }
+  }
 
   return (
     <div>
       <header>
         <h1>Todo App</h1>
       </header>
+      <div>
+        <input
+          type="text"
+          placeholder="What needs to be done?"
+          value={input}
+          onChange={handleChange}
+          onKeyDown={handleKeyDown}
+        />
+      </div>
       <ul>
         {todos.map((todo) => (
           <TodoItem key={todo.id} todo={todo} />
