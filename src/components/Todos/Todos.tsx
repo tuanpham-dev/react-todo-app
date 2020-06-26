@@ -1,6 +1,6 @@
 import React, { FC, useState, ChangeEvent, KeyboardEvent } from 'react'
-import { Todo } from '../types'
-import TodoItem from './TodoItem'
+import { Todo } from '../../types'
+import TodoItem from '../TodoItem/TodoItem'
 import { v4 as uuid4 } from 'uuid'
 
 interface Props {}
