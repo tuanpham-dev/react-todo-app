@@ -46,6 +46,12 @@ const Todos: FC<Props> = () => {
     setTodos(newTodos)
   }
 
+  const handleTitleChange = (todoToChange: Todo, title: string) => {
+    const newTodos = todos.map((todo) => (todo.id === todoToChange.id ? { ...todo, title } : todo))
+
+    setTodos(newTodos)
+  }
+
   return (
     <StyledTodos.Wrapper>
       <StyledTodos.Header>
@@ -62,7 +68,13 @@ const Todos: FC<Props> = () => {
       </div>
       <StyledTodos.List>
         {todos.map((todo) => (
-          <TodoItem key={todo.id} todo={todo} onToggle={handleToggle} onRemove={handleRemove} />
+          <TodoItem
+            key={todo.id}
+            todo={todo}
+            onToggle={handleToggle}
+            onRemove={handleRemove}
+            onTitleChange={handleTitleChange}
+          />
         ))}
       </StyledTodos.List>
     </StyledTodos.Wrapper>

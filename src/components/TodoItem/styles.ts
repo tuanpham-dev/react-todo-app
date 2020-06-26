@@ -58,9 +58,27 @@ const RemoveButton = styled.button`
   }
 `
 
+const Input = styled.input`
+  font-family: 'Nunito', sans-serif;
+  font-size: 20px;
+  font-weight: bold;
+  color: #515056;
+  border: 1px solid #edebec;
+  outline-color: #b2b4b3;
+  width: 100%;
+  padding: 8px 20px;
+  margin-right: -30px;
+  transition: border-color 0.3s ease-in-out;
+
+  &:hover {
+    border-color: #d8d9da;
+  }
+`
+
 export const StyledTodoItem = {
   Wrapper,
   Checkbox,
   Label,
   RemoveButton,
+  Input,
 }
