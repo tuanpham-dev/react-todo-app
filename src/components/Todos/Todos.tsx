@@ -40,6 +40,12 @@ const Todos: FC<Props> = () => {
     setTodos(newTodos)
   }
 
+  const handleRemove = (todoToRemove: Todo) => {
+    const newTodos = todos.filter((todo) => todo.id !== todoToRemove.id)
+
+    setTodos(newTodos)
+  }
+
   return (
     <StyledTodos.Wrapper>
       <StyledTodos.Header>
@@ -56,7 +62,7 @@ const Todos: FC<Props> = () => {
       </div>
       <StyledTodos.List>
         {todos.map((todo) => (
-          <TodoItem key={todo.id} todo={todo} onToggle={handleToggle} />
+          <TodoItem key={todo.id} todo={todo} onToggle={handleToggle} onRemove={handleRemove} />
         ))}
       </StyledTodos.List>
     </StyledTodos.Wrapper>

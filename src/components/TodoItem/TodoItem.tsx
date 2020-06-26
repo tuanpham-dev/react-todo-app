@@ -5,9 +5,10 @@ import { StyledTodoItem } from './styles'
 interface Props {
   todo: Todo
   onToggle: (todo: Todo) => void
+  onRemove: (todo: Todo) => void
 }
 
-const TodoItem: FC<Props> = ({ todo, onToggle }) => {
+const TodoItem: FC<Props> = ({ todo, onToggle, onRemove }) => {
   return (
     <StyledTodoItem.Wrapper>
       <StyledTodoItem.Checkbox
@@ -16,6 +17,7 @@ const TodoItem: FC<Props> = ({ todo, onToggle }) => {
         onChange={() => onToggle(todo)}
       />
       <StyledTodoItem.Label>{todo.title}</StyledTodoItem.Label>
+      <StyledTodoItem.RemoveButton onClick={() => onRemove(todo)}>×</StyledTodoItem.RemoveButton>
     </StyledTodoItem.Wrapper>
   )
 }
