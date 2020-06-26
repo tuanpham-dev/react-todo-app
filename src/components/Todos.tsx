@@ -31,6 +31,14 @@ const Todos: FC<Props> = () => {
     }
   }
 
+  const handleToggle = (todoToToggle: Todo) => {
+    const newTodos = todos.map((todo) =>
+      todo.id === todoToToggle.id ? { ...todo, completed: !todo.completed } : todo
+    )
+
+    setTodos(newTodos)
+  }
+
   return (
     <div>
       <header>
@@ -47,7 +55,7 @@ const Todos: FC<Props> = () => {
       </div>
       <ul>
         {todos.map((todo) => (
-          <TodoItem key={todo.id} todo={todo} />
+          <TodoItem key={todo.id} todo={todo} onToggle={handleToggle} />
         ))}
       </ul>
     </div>
