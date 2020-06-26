@@ -12,7 +12,9 @@
     "@types/react-dom": "^16.9.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-redux": "^7.2.0",
     "react-scripts": "3.4.1",
+    "redux": "^4.0.5",
     "styled-components": "^5.1.1",
     "typescript": "~3.7.2",
     "uuid": "^8.2.0"
@@ -39,6 +41,8 @@
     ]
   },
   "devDependencies": {
+    "@types/react-redux": "^7.1.9",
+    "@types/redux": "^3.6.0",
     "@types/styled-components": "^5.1.0",
     "@types/uuid": "^8.0.0"
   }
