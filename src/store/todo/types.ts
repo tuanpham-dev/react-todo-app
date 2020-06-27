@@ -1,3 +1,5 @@
+import { ActionHandler, ActionHandlerMap } from '../types'
+
 export interface Todo {
   id: string
   title: string
@@ -37,3 +39,6 @@ interface ChangeTodoTitle {
 }
 
 export type TodoAction = AddTodo | RemoveTodo | ToggleTodo | ChangeTodoTitle
+
+export type TodoActionHandler<T extends TodoAction['type']> = ActionHandler<TodoState, T>
+export type TodoActionHandlerMap = ActionHandlerMap<TodoState>
