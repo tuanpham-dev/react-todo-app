@@ -13,6 +13,7 @@ export enum TodoActionType {
   REMOVE = 'TODO/REMOVE',
   TOGGLE = 'TODO/TOGGLE',
   CHANGE_TITLE = 'TODO/CHANGE_TITLE',
+  CLEAR_COMPLETED = 'TODO/CLEAR_COMPLETED'
 }
 
 interface AddTodo {
@@ -38,7 +39,11 @@ interface ChangeTodoTitle {
   }
 }
 
-export type TodoAction = AddTodo | RemoveTodo | ToggleTodo | ChangeTodoTitle
+interface ClearCompletedTodo {
+  type: typeof TodoActionType.CLEAR_COMPLETED
+}
+
+export type TodoAction = AddTodo | RemoveTodo | ToggleTodo | ChangeTodoTitle | ClearCompletedTodo
 
 export type TodoActionHandler<T extends TodoAction['type']> = ActionHandler<TodoState, T>
 export type TodoActionHandlerMap = ActionHandlerMap<TodoState>

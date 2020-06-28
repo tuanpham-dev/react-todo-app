@@ -40,11 +40,18 @@ const changeTodoTitle: TodoActionHandler<TodoActionType.CHANGE_TITLE> = (state, 
   return newTodos
 }
 
+const clearCompletedTodo: TodoActionHandler<TodoActionType.CLEAR_COMPLETED> = (state, action) => {
+  const newTodos = state.filter((todo) => !todo.completed)
+
+  return newTodos
+}
+
 const actionHandlerMap: TodoActionHandlerMap = {
   [TodoActionType.ADD]: addTodo,
   [TodoActionType.REMOVE]: removeTodo,
   [TodoActionType.TOGGLE]: toggleTodo,
   [TodoActionType.CHANGE_TITLE]: changeTodoTitle,
+  [TodoActionType.CLEAR_COMPLETED]: clearCompletedTodo,
 }
 
 const initialState: TodoState = []

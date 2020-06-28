@@ -57,6 +57,16 @@ const Link = styled(NavLink)`
   }
 `
 
+const ClearButton = styled.button`
+  color: #f64747;
+  cursor: pointer;
+  font-size: inherit;
+  border: 0;
+  background: none;
+  padding: 0;
+  margin: 0 0 0 auto;
+`
+
 export const StyledTodos = {
   Wrapper,
   Header,
@@ -65,4 +75,5 @@ export const StyledTodos = {
   Toolbar,
   Status,
   Link,
+  ClearButton,
 }

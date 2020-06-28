@@ -9,13 +9,26 @@ const initialState: AppState = {
 const sampleTodos: TodoState = [
   {
     id: '1',
-    title: 'Buy a book',
+    title: 'Read a book',
     completed: false,
   },
   {
     id: '2',
     title: 'Run a mile',
     completed: false,
+  },
+]
+
+const sampleCompletedTodos: TodoState = [
+  {
+    id: '1',
+    title: 'Buy a book',
+    completed: true,
+  },
+  {
+    id: '2',
+    title: 'Run a mile',
+    completed: true,
   },
 ]
 
@@ -91,5 +104,14 @@ describe('root reducer', () => {
         }),
       ])
     )
+  })
+
+  it('should handle TODO/CLEAR_COMPLETED', () => {
+    const reducer = rootReducer(
+      { ...initialState, todo: sampleCompletedTodos },
+      { type: TodoActionType.CLEAR_COMPLETED }
+    )
+
+    expect(reducer.todo.length).toEqual(0)
   })
 })

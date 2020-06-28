@@ -1,12 +1,13 @@
 import React, { FC, useState, KeyboardEvent } from 'react'
 import TodoItem from '../TodoItem/TodoItem'
 import { StyledTodos } from './styles'
-import { addTodo } from '../../store/todo/actions'
+import { addTodo, clearCompletedTodo } from '../../store/todo/actions'
 import { ConnectedProps, connect } from 'react-redux'
 import { TodoState } from '../../store/todo/types'
 
 const mapDispatch = {
   addTodo,
+  clearCompletedTodo,
 }
 
 const connector = connect(null, mapDispatch)
@@ -16,7 +17,7 @@ interface Props extends PropsFromRedux {
   todos: TodoState
 }
 
-const Todos: FC<Props> = ({ todos, addTodo }) => {
+const Todos: FC<Props> = ({ todos, addTodo, clearCompletedTodo }) => {
   const [input, setInput] = useState<string>('')
 
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
@@ -40,6 +41,9 @@ const Todos: FC<Props> = ({ todos, addTodo }) => {
         </StyledTodos.Link>
         <StyledTodos.Link to="/active">Active</StyledTodos.Link>
         <StyledTodos.Link to="/completed">Completed</StyledTodos.Link>
+        <StyledTodos.ClearButton onClick={clearCompletedTodo}>
+          Clear Completed
+        </StyledTodos.ClearButton>
       </StyledTodos.Toolbar>
       <div>
         <StyledTodos.Input

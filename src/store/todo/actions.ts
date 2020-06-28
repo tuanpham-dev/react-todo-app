@@ -23,3 +23,7 @@ export const changeTodoTitle: ActionCreator<TodoAction> = (todo: Todo, newTitle:
     newTitle,
   },
 })
+
+export const clearCompletedTodo: ActionCreator<TodoAction> = () => ({
+  type: TodoActionType.CLEAR_COMPLETED,
+})
