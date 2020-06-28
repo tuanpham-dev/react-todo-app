@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { NavLink } from 'react-router-dom'
 
 const Wrapper = styled.div`
   background-color: #fff;
@@ -36,9 +37,32 @@ const List = styled.ul`
   padding: 0;
 `
 
+const Toolbar = styled.div`
+  font-size: 16px;
+  display: flex;
+  margin-bottom: 15px;
+`
+
+const Status = styled.span`
+  margin-right: auto;
+`
+
+const Link = styled(NavLink)`
+  margin-left: 5px;
+  margin-right: 5px;
+  text-decoration: none;
+
+  &.active {
+    text-decoration: underline;
+  }
+`
+
 export const StyledTodos = {
   Wrapper,
   Header,
   Input,
   List,
+  Toolbar,
+  Status,
+  Link,
 }

@@ -1,8 +1,11 @@
 import React from 'react'
-import Todos from './components/Todos/Todos'
 import { GlobalStyles } from './globalStyles'
 import configureStore from './store'
 import { Provider } from 'react-redux'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import AllTodos from './pages/AllTodos'
+import ActiveTodos from './pages/ActiveTodos'
+import CompletedTodos from './pages/CompletedTodos'
 
 function App() {
   const store = configureStore()
@@ -11,7 +14,13 @@ function App() {
     <div className="App">
       <Provider store={store}>
         <GlobalStyles />
-        <Todos />
+        <Router>
+          <Switch>
+            <Route path="/" exact component={AllTodos} />
+            <Route path="/active" component={ActiveTodos} />
+            <Route path="/completed" component={CompletedTodos} />
+          </Switch>
+        </Router>
       </Provider>
     </div>
   )
