@@ -1,4 +1,4 @@
-import React, { FC, useState, ChangeEvent, KeyboardEvent } from 'react'
+import React, { FC, useState, KeyboardEvent } from 'react'
 import { Todo } from '../../types'
 import { StyledTodoItem } from './styles'
 import { toggleTodo, removeTodo, changeTodoTitle } from '../../store/todo/actions'
@@ -25,10 +25,6 @@ const TodoItem: FC<Props> = ({ todo, removeTodo, toggleTodo, changeTodoTitle }) 
     setIsEditing(true)
   }
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setInput(e.target.value)
-  }
-
   const updateTitle = (update = true) => {
     if (input.length === 0 || !update) {
       setInput(todo.title)
@@ -47,10 +43,6 @@ const TodoItem: FC<Props> = ({ todo, removeTodo, toggleTodo, changeTodoTitle }) 
     }
   }
 
-  const handleLostFocus = () => {
-    updateTitle()
-  }
-
   return (
     <StyledTodoItem.Wrapper>
       {isEditing ? (
@@ -58,9 +50,9 @@ const TodoItem: FC<Props> = ({ todo, removeTodo, toggleTodo, changeTodoTitle }) 
           type="text"
           autoFocus={true}
           value={input}
-          onChange={handleChange}
+          onChange={(e) => setInput(e.target.value)}
           onKeyDown={handleKeyDown}
-          onBlur={handleLostFocus}
+          onBlur={() => updateTitle()}
         />
       ) : (
         <>

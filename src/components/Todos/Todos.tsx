@@ -1,4 +1,4 @@
-import React, { FC, useState, ChangeEvent, KeyboardEvent } from 'react'
+import React, { FC, useState, KeyboardEvent } from 'react'
 import TodoItem from '../TodoItem/TodoItem'
 import { StyledTodos } from './styles'
 import { AppState } from '../../store/types'
@@ -20,10 +20,6 @@ type Props = ConnectedProps<typeof connector>
 const Todos: FC<Props> = ({ todos, addTodo }) => {
   const [input, setInput] = useState<string>('')
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setInput(e.target.value)
-  }
-
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter' || e.keyCode === 13) {
       if (input.length > 0) {
@@ -43,7 +39,7 @@ const Todos: FC<Props> = ({ todos, addTodo }) => {
           type="text"
           placeholder="What needs to be done?"
           value={input}
-          onChange={handleChange}
+          onChange={(e) => setInput(e.target.value)}
           onKeyDown={handleKeyDown}
         />
       </div>
