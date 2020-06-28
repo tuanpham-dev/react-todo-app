@@ -1,13 +1,23 @@
 import React, { FC, useState, ChangeEvent, KeyboardEvent } from 'react'
-import { Todo } from '../../types'
 import TodoItem from '../TodoItem/TodoItem'
-import { v4 as uuid4 } from 'uuid'
 import { StyledTodos } from './styles'
+import { AppState } from '../../store/types'
+import { addTodo } from '../../store/todo/actions'
+import { ConnectedProps, connect } from 'react-redux'
 
-interface Props {}
+const mapState = (state: AppState) => ({
+  todos: state.todo,
+})
 
-const Todos: FC<Props> = () => {
-  const [todos, setTodos] = useState<Todo[]>([])
+const mapDispatch = {
+  addTodo,
+}
+
+const connector = connect(mapState, mapDispatch)
+
+type Props = ConnectedProps<typeof connector>
+
+const Todos: FC<Props> = ({ todos, addTodo }) => {
   const [input, setInput] = useState<string>('')
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -17,39 +27,10 @@ const Todos: FC<Props> = () => {
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter' || e.keyCode === 13) {
       if (input.length > 0) {
-        const newTodos: Todo[] = [
-          ...todos,
-          {
-            id: uuid4(),
-            title: input,
-            completed: false,
-          },
-        ]
-
-        setTodos(newTodos)
+        addTodo(input)
         setInput('')
       }
     }
-  }
-
-  const handleToggle = (todoToToggle: Todo) => {
-    const newTodos = todos.map((todo) =>
-      todo.id === todoToToggle.id ? { ...todo, completed: !todo.completed } : todo
-    )
-
-    setTodos(newTodos)
-  }
-
-  const handleRemove = (todoToRemove: Todo) => {
-    const newTodos = todos.filter((todo) => todo.id !== todoToRemove.id)
-
-    setTodos(newTodos)
-  }
-
-  const handleTitleChange = (todoToChange: Todo, title: string) => {
-    const newTodos = todos.map((todo) => (todo.id === todoToChange.id ? { ...todo, title } : todo))
-
-    setTodos(newTodos)
   }
 
   return (
@@ -68,17 +49,11 @@ const Todos: FC<Props> = () => {
       </div>
       <StyledTodos.List>
         {todos.map((todo) => (
-          <TodoItem
-            key={todo.id}
-            todo={todo}
-            onToggle={handleToggle}
-            onRemove={handleRemove}
-            onTitleChange={handleTitleChange}
-          />
+          <TodoItem key={todo.id} todo={todo} />
         ))}
       </StyledTodos.List>
     </StyledTodos.Wrapper>
   )
 }
 
-export default Todos
+export default connector(Todos)

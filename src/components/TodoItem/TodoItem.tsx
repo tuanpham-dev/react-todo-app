@@ -1,15 +1,23 @@
 import React, { FC, useState, ChangeEvent, KeyboardEvent } from 'react'
 import { Todo } from '../../types'
 import { StyledTodoItem } from './styles'
+import { toggleTodo, removeTodo, changeTodoTitle } from '../../store/todo/actions'
+import { connect, ConnectedProps } from 'react-redux'
 
-interface Props {
-  todo: Todo
-  onToggle: (todo: Todo) => void
-  onRemove: (todo: Todo) => void
-  onTitleChange: (todo: Todo, title: string) => void
+const mapDispatch = {
+  removeTodo,
+  toggleTodo,
+  changeTodoTitle,
 }
 
-const TodoItem: FC<Props> = ({ todo, onToggle, onRemove, onTitleChange }) => {
+const connector = connect(null, mapDispatch)
+
+type PropsFromRedux = ConnectedProps<typeof connector>
+interface Props extends PropsFromRedux {
+  todo: Todo
+}
+
+const TodoItem: FC<Props> = ({ todo, removeTodo, toggleTodo, changeTodoTitle }) => {
   const [isEditing, setIsEditing] = useState<boolean>(false)
   const [input, setInput] = useState<string>(todo.title)
 
@@ -26,7 +34,7 @@ const TodoItem: FC<Props> = ({ todo, onToggle, onRemove, onTitleChange }) => {
       setInput(todo.title)
       setIsEditing(false)
     } else {
-      onTitleChange(todo, input)
+      changeTodoTitle(todo, input)
       setIsEditing(false)
     }
   }
@@ -59,12 +67,12 @@ const TodoItem: FC<Props> = ({ todo, onToggle, onRemove, onTitleChange }) => {
           <StyledTodoItem.Checkbox
             type="checkbox"
             checked={todo.completed}
-            onChange={() => onToggle(todo)}
+            onChange={() => toggleTodo(todo)}
           />
           <StyledTodoItem.Label onDoubleClick={handleDoubleClick}>
             {todo.title}
           </StyledTodoItem.Label>
-          <StyledTodoItem.RemoveButton onClick={() => onRemove(todo)}>
+          <StyledTodoItem.RemoveButton onClick={() => removeTodo(todo)}>
             ×
           </StyledTodoItem.RemoveButton>
         </>
@@ -73,4 +81,4 @@ const TodoItem: FC<Props> = ({ todo, onToggle, onRemove, onTitleChange }) => {
   )
 }
 
-export default TodoItem
+export default connector(TodoItem)
