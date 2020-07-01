@@ -1,4 +1,10 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# React Todo App
+
+This is a step by step todo app created for those who want to learn React and TypeScript. Please view commits history for steps [https://github.com/tuanpham-dev/react-todo-app/commits/master](https://github.com/tuanpham-dev/react-todo-app/commits/master)
+
+![react-todo-app](https://raw.githubusercontent.com/tuanpham-dev/react-todo-app/master/screenshot.png)
+
+[Demo](https://tuanpham-dev.github.io/react-todo-app)
 
 ## Available Scripts
 
